@@ -1,10 +1,11 @@
-const sell = props => {
+import CreateItem from '../components/CreateItem';
+
+const Sell = props => {
   return (
     <div>
-      <p>Sell!</p>
+      <CreateItem />
     </div>
-  )
-}
+  );
+};
 
-export default sell;
-
+export default Sell;
