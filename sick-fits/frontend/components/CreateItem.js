@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import formatMoney from '../lib/formatMoney';
 import Error from '../components/ErrorMessage';
 
-export const CREATE_ITEM_MUTATION = gql`
+const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(
     $title: String!
     $description: String!
@@ -26,12 +26,12 @@ export const CREATE_ITEM_MUTATION = gql`
   }
 `;
 
-export default class CreateItem extends Component {
+class CreateItem extends Component {
   state = {
     title: 'Cool Shoes',
     description: 'I love those shoes',
-    image: 'dog.jpg',
-    largeImage: 'large-dog.jpg',
+    image: '',
+    largeImage: '',
     price: 1000
   };
 
@@ -56,11 +56,12 @@ export default class CreateItem extends Component {
       }
     );
     const file = await res.json();
-    console.log(file);
+
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url
     });
+    console.log(file, this.state);
   };
 
   render() {
@@ -71,6 +72,7 @@ export default class CreateItem extends Component {
             onSubmit={async e => {
               //stop the form from submitting
               e.preventDefault();
+              //check if image has been uploaded
               //call the utation
               const res = await createItem();
               //change to singel item page
@@ -92,6 +94,13 @@ export default class CreateItem extends Component {
                   required
                   onChange={this.uploadFile}
                 />
+                {this.state.image && (
+                  <img
+                    width='200'
+                    src={this.state.image}
+                    alt='Upload Preview'
+                  />
+                )}
               </label>
               <label htmlFor='title'>
                 Title
@@ -137,3 +146,6 @@ export default class CreateItem extends Component {
     );
   }
 }
+
+export default CreateItem;
+export { CREATE_ITEM_MUTATION };
