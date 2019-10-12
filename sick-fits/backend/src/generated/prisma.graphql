@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/eddie-chung-ccf7de/sickfitsDemo/devottafillthisout
-# timestamp: Sat Oct 05 2019 21:52:13 GMT+0200 (Central European Summer Time)
+# timestamp: Sat Oct 12 2019 18:59:00 GMT+0200 (Central European Summer Time)
 
 type AggregateItem {
   count: Int!
@@ -862,4 +862,5 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }
